@@ -1,0 +1,25 @@
+
+The best way to start is a demo of what we’re going to build together. I’ll walk through some of the
+ features of a simple application that enables someone to pick a GPS location, take a picture and
+save it with a description locally. A list view will enumerate the pins and allow the user to delete the picture.
+
+We’ll start with a bare-bones GitHub repository that has Redux and React Native setup with a simple
+routing library so that we can start diving into some of the challenges with cross-platform mobile development.
+We’ll start by looking at how we can handle local application state with Redux and ensuring that we
+can build cross-platform components in addition to platform-specific components.
+
+We’ll then take a step back and review how we can leverage an existing mapping library and speak more
+generally about what to look for in the React Native eco-system.
+
+After confirming that the mapping library and state management are functioning correctly, we’ll
+implement some simple routes to round off the views in our application.
+
+Once we can navigate, store and pin labels on the map, we’ll integrate the device’s camera and
+see how we can store binary data in Redux.
+
+I’ll also cover some device-specific considerations for Android and iOS.
+
+At this point (assuming there’s time), I’ll illustrate some of the techniques for bridging code
+between Swift and React Native by creating a special “Westernize” button that calls a GPU-accelerated
+image manipulation library, transforms the binary image and then issues a callback back to the
+React Native application in order to update the redux store.
