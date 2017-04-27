@@ -1,3 +1,5 @@
+/* eslint no-console: 0
+ */
 import React from 'react';
 import {
   AsyncStorage,
@@ -40,9 +42,9 @@ function annotation(post) {
 }
 
 class Screen extends React.Component {
-  
-  constructor() {
-    super(this);
+
+  constructor(props) {
+    super(props);
     this.renderEmpty = this.renderEmpty.bind(this);
   }
 
@@ -55,7 +57,7 @@ class Screen extends React.Component {
     // NOTE: this could be handled in the ActionCreator with Saga or Thunk:
     AsyncStorage.setItem('@Backup:posts', JSON.stringify(this.props.posts)).then(() => {
       this.props.navigateHome();
-    });
+    }).catch(err => console.warn(err));
   }
 
   post() {
@@ -64,9 +66,9 @@ class Screen extends React.Component {
   }
 
   renderEmpty() {
-    return <View style={styles.container} >
+    return (<View style={styles.container} >
       <PrimaryButton label="Back" onPress={() => this.backPressed()} />
-    </View>
+    </View>);
   }
 
   render() {
@@ -95,6 +97,17 @@ class Screen extends React.Component {
     </View>);
   }
 }
+
+Screen.propTypes = {
+  navigateBack: React.PropTypes.func.isRequired,
+  navigateHome: React.PropTypes.func.isRequired,
+  deletePost: React.PropTypes.func.isRequired,
+  posts: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  nav: React.PropTypes.shape({
+    routes: React.PropTypes.array,
+    index: React.PropTypes.number,
+  }).isRequired,
+};
 
 function mapStateToProps(state) {
   return {

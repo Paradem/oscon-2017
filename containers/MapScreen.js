@@ -1,4 +1,6 @@
 /* global navigator */
+/* eslint no-console: 0
+ */
 import React from 'react';
 import {
   Animated,
@@ -75,7 +77,7 @@ class Screen extends React.Component {
   }
 
   attachPhoto() {
-    this.props.navigation.dispatch({ type: 'Navigation/NAVIGATE', routeName: 'MapPost' });
+    this.props.navigateMapPost();
   }
 
   showMarker() {
@@ -124,9 +126,18 @@ class Screen extends React.Component {
   }
 }
 
+Screen.propTypes = {
+  navigateMapPost: React.PropTypes.func.isRequired,
+  setDraftPostCoordinates: React.PropTypes.func.isRequired,
+};
+
+function mapStateToProps() {
+  return {};
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
 
-export default connect(() => { return {} }, mapDispatchToProps)(Screen);
+export default connect(mapStateToProps, mapDispatchToProps)(Screen);

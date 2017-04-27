@@ -1,3 +1,5 @@
+/* eslint react/prop-types: 0
+ */
 import React from 'react';
 import {
   TabNavigator,
@@ -12,33 +14,45 @@ import MapPostScreen from './containers/MapPostScreen';
 import HomePostDetailScreen from './containers/HomePostDetailScreen';
 import { palette } from './styles';
 
+const TabBarIcon = props =>
+  <Ionicons
+    name={props.focused ? props.focusedName : props.unfocusedName}
+    size={26}
+    style={{ color: props.tintColor }}
+  />;
+
+TabBarIcon.propTypes = {
+  focused: React.PropTypes.bool.isRequired,
+  focusedName: React.PropTypes.string.isRequired,
+  unfocusedName: React.PropTypes.string.isRequired,
+  tintColor: React.PropTypes.string.isRequired,
+};
+
 export const TabNav = TabNavigator({
   HomeTab: {
     screen: HomeScreen,
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-home' : 'ios-home-outline'}
-            size={26}
-            style={{ color: tintColor }}
-          />
-        )
-      },
+      tabBarIcon: ({ tintColor, focused }) => (<TabBarIcon
+        focused={focused}
+        tintColor={tintColor}
+        focusedName="ios-home"
+        unfocusedName="ios-home-outline"
+      />),
+    },
   },
   MapTab: {
     screen: MapScreen,
     navigationOptions: {
       tabBarLabel: 'Map',
-      tabBarIcon: ({ tintColor, focused }) => (
-          <Ionicons
-            name={focused ? 'ios-settings' : 'ios-settings-outline'}
-            size={26}
-            style={{ color: tintColor }}
-          />
-        )
-      },
+      tabBarIcon: ({ tintColor, focused }) => (<TabBarIcon
+        focused={focused}
+        tintColor={tintColor}
+        focusedName="ios-settings"
+        unfocusedName="ios-settings-outline"
+      />),
     },
+  },
 }, {
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? palette.RICH_NAVY : '#fff',

@@ -20,3 +20,18 @@ export function restorePosts(posts) {
     posts: JSON.parse(posts),
   };
 }
+
+export function navigatePostDetail(post) {
+  return {
+    type: 'Navigation/NAVIGATE',
+    routeName: 'PostDetail',
+    id: post.id,
+  };
+}
+
+export function navigateMapPost() {
+  return {
+    type: 'Navigation/NAVIGATE',
+    routeName: 'MapPost',
+  };
+}

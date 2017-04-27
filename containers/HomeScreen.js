@@ -4,7 +4,6 @@ import {
   AsyncStorage,
   Image,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableHighlight,
   View,
@@ -13,8 +12,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { styles } from '../styles';
 import { ActionCreators } from '../actions';
-
-const screenStyles = StyleSheet.create({});
 
 class Screen extends React.Component {
 
@@ -39,7 +36,7 @@ class Screen extends React.Component {
   }
 
   postPressed(post) {
-    this.props.navigation.dispatch({ type: 'Navigation/NAVIGATE', routeName: 'PostDetail', id: post.id });
+    this.props.navigatePostDetail(post);
   }
 
   posts() {
@@ -72,6 +69,13 @@ class Screen extends React.Component {
     </View>);
   }
 }
+
+Screen.propTypes = {
+  navigatePostDetail: React.PropTypes.func.isRequired,
+  restorePosts: React.PropTypes.func.isRequired,
+  posts: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     posts: state.posts,

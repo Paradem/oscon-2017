@@ -72,7 +72,7 @@ class Screen extends React.Component {
     }).then((data) => {
       this.setState({ photo: data });
       this.nameTextInput.focus();
-    }).catch(err => console.error(err));
+    });
   }
 
   renderStep1() {
@@ -144,6 +144,18 @@ class Screen extends React.Component {
     </View>);
   }
 }
+
+Screen.propTypes = {
+  navigateBack: React.PropTypes.func.isRequired,
+  createPost: React.PropTypes.func.isRequired,
+  setDraftPostName: React.PropTypes.func.isRequired,
+  navigateHome: React.PropTypes.func.isRequired,
+  draftPost: React.PropTypes.shape({
+
+  }).isRequired,
+};
+
+
 function mapStateToProps(state) {
   return {
     draftPost: state.draftPost,

@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "eslintx:all": "find ../app/assets/javascripts -type f -iname '*.es6' -or -iname '*.jsx' | xargs eslint --config .eslintrc.js --fix",
-    "test": "../bin/karma",
-    "test:watch": "../bin/karma --no-single-run --auto-watch"
+    "eslint": "eslint --ext .js ."
   },
   "peerDependencies": {
   },
