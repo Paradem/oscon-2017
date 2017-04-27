@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   KeyboardAvoidingView,
-  Dimensions,
   Image,
   ScrollView,
   StyleSheet,
@@ -13,16 +12,12 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Camera from 'react-native-camera';
 
 import SecondaryButton from '../components/SecondaryButton';
 import PrimaryButton from '../components/PrimaryButton';
-import Camera from 'react-native-camera';
 import { ActionCreators } from '../actions';
 import { styles, palette } from '../styles';
-
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
-const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
-const { width, height } = Dimensions.get('window');
 
 const screenStyles = StyleSheet.create({
   scrollContainer: {
@@ -53,6 +48,8 @@ class Screen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { photo: null };
+    this.takePicture = this.takePicture.bind(this);
+    this.clearPicture = this.clearPicture.bind(this);
   }
 
   cancel() {
@@ -87,11 +84,11 @@ class Screen extends React.Component {
           style={screenStyles.camera}
           captureTarget={Camera.constants.CaptureTarget.disk}
           aspect={Camera.constants.Aspect.fit}
-          >
+        >
           <TouchableHighlight
             style={[screenStyles.snapButton, { backgroundColor: palette.HONEYCOMB }]}
-            onPress={this.takePicture.bind(this)}
-            >
+            onPress={this.takePicture}
+          >
             <Text style={styles.buttonText}>SNAP</Text>
           </TouchableHighlight>
         </Camera>
@@ -103,11 +100,12 @@ class Screen extends React.Component {
   }
 
   renderPicturePreview() {
-    return (<View style={{ flex: 1 }}>
-      <Text style={styles.heading1} >Post Photo</Text>
-      <Image source={{ uri: this.state.photo.path }} style={screenStyles.imagePreview} />
-      <Text style={styles.buttonText} onPress={this.clearPicture.bind(this)}>Retake</Text>
-    </View>);
+    return (
+      <View style={{ flex: 1 }}>
+        <Text style={styles.heading1} >Post Photo</Text>
+        <Image source={{ uri: this.state.photo.path }} style={screenStyles.imagePreview} />
+        <Text style={styles.buttonText} onPress={this.clearPicture}>Retake</Text>
+      </View>);
   }
 
 
