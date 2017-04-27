@@ -12,18 +12,6 @@ import MapPostScreen from './containers/MapPostScreen';
 import HomePostDetailScreen from './containers/HomePostDetailScreen';
 import { palette } from './styles';
 
-const mapRoutes = {
-  MapIndex: {
-    screen: MapScreen,
-  },
-  MapPost: {
-    screen: MapPostScreen,
-    navigationOptions: {
-      title: null,
-    },
-  },
-};
-
 export const TabNav = TabNavigator({
   HomeTab: {
     screen: HomeScreen,

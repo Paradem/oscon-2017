@@ -6,7 +6,7 @@ const initialState = {
   coordinate: { latitude: null, longitude: null },
 };
 
-export const draftPostReducer = {
+const draftPostReducer = {
   draftPost: (state = initialState, action) => {
     switch (action.type) {
       case types.SET_DRAFT_POST_PARAMS:
@@ -17,3 +17,4 @@ export const draftPostReducer = {
   },
 };
 
+export default draftPostReducer;

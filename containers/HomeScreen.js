@@ -1,11 +1,9 @@
 import React from 'react';
-import { styles, palette } from '../styles';
 import {
   AppState,
   AsyncStorage,
-  Button,
   Image,
-	ScrollView,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableHighlight,
@@ -13,7 +11,10 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { styles } from '../styles';
 import { ActionCreators } from '../actions';
+
+const screenStyles = StyleSheet.create({});
 
 class Screen extends React.Component {
 
@@ -29,10 +30,10 @@ class Screen extends React.Component {
   }
 
   componentWillMount() {
-		// run on first launch!
+    // run on first launch!
     AsyncStorage.getItem('@Backup:posts').then((postsFromStorage) => {
       if (postsFromStorage !== null && this.posts().length === 0) {
-			  this.props.restorePosts(postsFromStorage);
+        this.props.restorePosts(postsFromStorage);
       }
     });
   }
@@ -42,7 +43,7 @@ class Screen extends React.Component {
   }
 
   posts() {
-	  return this.props.posts;
+    return this.props.posts;
   }
 
   renderEmpty() {
@@ -80,4 +81,5 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Screen);

@@ -7,3 +7,5 @@ export const ActionCreators = Object.assign({},
   DraftPostActions,
   PostsActions,
 );
+
+export default ActionCreators;

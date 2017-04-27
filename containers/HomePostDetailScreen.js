@@ -1,27 +1,49 @@
 import React from 'react';
-import { styles, palette } from '../styles';
 import {
-  AppState,
   AsyncStorage,
-  Button,
   Image,
-	ScrollView,
   StyleSheet,
   Text,
-  TouchableHighlight,
   View,
 } from 'react-native';
-import MapView from 'react-native-maps';
-import SecondaryButton from '../components/SecondaryButton';
-import PrimaryButton from '../components/PrimaryButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import MapView from 'react-native-maps';
+
+import { styles } from '../styles';
+import SecondaryButton from '../components/SecondaryButton';
+import PrimaryButton from '../components/PrimaryButton';
 import { ActionCreators } from '../actions';
 
-class Screen extends React.Component {
+const screenStyles = StyleSheet.create({
+  map: {
+    height: 100,
+  },
+});
 
-  constructor(props) {
-    super(props);
+function getLocationRegion(post) {
+  const delta = 0.01;
+  return {
+    latitude: post.coordinate.latitude || 1,
+    longitude: post.coordinate.longitude || 1,
+    latitudeDelta: delta,
+    longitudeDelta: delta,
+  };
+}
+
+function annotation(post) {
+  return {
+    id: post.id,
+    latitude: post.coordinate.latitude || 1,
+    longitude: post.coordinate.longitude || 1,
+  };
+}
+
+class Screen extends React.Component {
+  
+  constructor() {
+    super(this);
+    this.renderEmpty = this.renderEmpty.bind(this);
   }
 
   backPressed() {
@@ -30,7 +52,7 @@ class Screen extends React.Component {
 
   deletePressed() {
     this.props.deletePost(this.post());
-		// NOTE: this could be handled in the ActionCreator with Saga or Thunk:
+    // NOTE: this could be handled in the ActionCreator with Saga or Thunk:
     AsyncStorage.setItem('@Backup:posts', JSON.stringify(this.props.posts)).then(() => {
       this.props.navigateHome();
     });
@@ -49,21 +71,21 @@ class Screen extends React.Component {
 
   render() {
     const post = this.post();
-    if (post === undefined) { return this.renderEmpty(); }
+    if (post === undefined) { return (this.renderEmpty()); }
     return (<View style={styles.container}>
       <Text style={styles.heading1} >{post.name}</Text>
       <View style={styles.postCard} >
         <Image source={{ uri: post.path }} style={{ height: 150 }} />
         <MapView
           style={screenStyles.map}
-          initialRegion={this.getLocationRegion(post)}
+          initialRegion={getLocationRegion(post)}
           showsUserLocation
           zoomEnabled={false}
           scrollEnabled={false}
           rotateEnabled={false}
           legalLabelInsets={{ bottom: 20, right: 20 }}
         >
-          <MapView.Marker coordinate={this.annotation(post)} />
+          <MapView.Marker coordinate={annotation(post)} />
         </MapView>
         <View style={styles.toolbar}>
           <PrimaryButton label="Back" onPress={() => this.backPressed()} />
@@ -72,25 +94,6 @@ class Screen extends React.Component {
       </View>
     </View>);
   }
-
-  getLocationRegion(post) {
-    const delta = 0.01;
-    return {
-      latitude: post.coordinate.latitude || 1,
-      longitude: post.coordinate.longitude || 1,
-      latitudeDelta: delta,
-      longitudeDelta: delta,
-    };
-  }
-
-  annotation(post) {
-    return {
-      id: post.id,
-      latitude: post.coordinate.latitude || 1,
-      longitude: post.coordinate.longitude || 1,
-    };
-  }
-
 }
 
 function mapStateToProps(state) {
@@ -103,11 +106,5 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
-
-const screenStyles = StyleSheet.create({
-  map: {
-    height: 100,
-  },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Screen);
