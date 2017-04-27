@@ -1,25 +1,19 @@
-import React from 'react'
+/* global __DEV__ */
+import React from 'react';
 import {
   AppRegistry,
-  AppState,
-  AsyncStorage,
-  Button,
-  StyleSheet,
-  Text,
-  View,
 } from 'react-native';
-import { connect, Provider } from 'react-redux'
-import { createStore, applyMiddleware, combineReducers, compose} from 'redux'
-import createLogger from 'redux-logger'
-import {  reducer } from './reducers'
-import { AppNavigator } from './reducers/navigation'
+import { connect, Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import createLogger from 'redux-logger';
 import {
-  NavigationActions,
   addNavigationHelpers,
 } from 'react-navigation';
+import { reducer } from './reducers';
+import { AppNavigator } from './reducers/navigation';
 
 // middleware that logs actions
-const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__  });
+const loggerMiddleware = createLogger({ predicate: () => __DEV__ });
 
 function configureStore(initialState) {
   const enhancer = compose(
@@ -32,16 +26,13 @@ function configureStore(initialState) {
 
 const AppWithNavigationState = connect(state => ({
   nav: state.nav,
-}))(({ dispatch, nav }) => {
-    return <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
-  }
-);
+}))(({ dispatch, nav }) => <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />);
 
 
 const App = () => (
   <Provider store={configureStore({})}>
     <AppWithNavigationState />
   </Provider>
-)
+);
 
 AppRegistry.registerComponent('Plimage', () => App);

@@ -1,17 +1,17 @@
 import {
   StyleSheet,
   Platform,
-} from "react-native";
+} from 'react-native';
 
 export const palette = {
-  RICH_NAVY: "#2A547A",
-  SKY_BLUE: "#1EB4D2",
-  HONEYCOMB: "#F2B93B",
-  SILVER: "#E8E9EA",
-  CHARCOAL: "#4D4D4D",
-  WHITE: "#FFF",
+  RICH_NAVY: '#2A547A',
+  SKY_BLUE: '#1EB4D2',
+  HONEYCOMB: '#F2B93B',
+  SILVER: '#E8E9EA',
+  CHARCOAL: '#4D4D4D',
+  WHITE: '#FFF',
 
-}
+};
 
 export const styles = StyleSheet.create({
   container: {
@@ -29,18 +29,18 @@ export const styles = StyleSheet.create({
   },
   heading1: {
     fontSize: 24,
-    fontWeight: "300",
+    fontWeight: '300',
     paddingLeft: 10,
     paddingBottom: 2,
-    paddingTop:4,
+    paddingTop: 4,
     color: palette.SKY_BLUE,
   },
   heading2: {
     fontSize: 21,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     paddingLeft: 10,
     paddingBottom: 2,
-    paddingTop:4,
+    paddingTop: 4,
     color: palette.RICH_NAVY,
   },
   formContainer: {
@@ -52,15 +52,15 @@ export const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: palette.WHITE,
   },
-	postCard: {
-		marginBottom: 10,
-		marginHorizontal: 7,
-		backgroundColor: palette.WHITE,
-		borderTopRightRadius: 10,
-		borderTopLeftRadius: 10,
-		paddingTop: 10,
-		borderBottomColor: palette.CHARCOAL,
-		borderBottomWidth: 4,
+  postCard: {
+    marginBottom: 10,
+    marginHorizontal: 7,
+    backgroundColor: palette.WHITE,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    paddingTop: 10,
+    borderBottomColor: palette.CHARCOAL,
+    borderBottomWidth: 4,
 
   },
   button: {
@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: palette.SKY_BLUE
+    backgroundColor: palette.SKY_BLUE,
   },
   buttonText: {
     fontSize: 17,
@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
   toolbar: {
     flexDirection: 'row',
     alignItems: 'stretch',
-    backgroundColor: "#C00",
+    backgroundColor: '#C00',
     height: 50,
   },
   welcome: {
@@ -98,7 +98,7 @@ export const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
-	scrollSection: {
-		flex: 1
-	},
+  scrollSection: {
+    flex: 1,
+  },
 });

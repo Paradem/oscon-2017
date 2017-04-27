@@ -1,19 +1,16 @@
-import React from 'react'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import HomeScreen from './containers/HomeScreen'
-import MapScreen from './containers/MapScreen'
-import MapPostScreen from './containers/MapPostScreen'
-import HomePostDetailScreen from './containers/HomePostDetailScreen'
-import { palette } from './styles'
+import React from 'react';
 import {
-  NavigationActions,
   TabNavigator,
-  StackNavigator,
 } from 'react-navigation';
 import {
   Platform,
 } from 'react-native';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import HomeScreen from './containers/HomeScreen';
+import MapScreen from './containers/MapScreen';
+import MapPostScreen from './containers/MapPostScreen';
+import HomePostDetailScreen from './containers/HomePostDetailScreen';
+import { palette } from './styles';
 
 const mapRoutes = {
   MapIndex: {
@@ -22,10 +19,10 @@ const mapRoutes = {
   MapPost: {
     screen: MapPostScreen,
     navigationOptions: {
-      title: null
+      title: null,
     },
   },
-}
+};
 
 export const TabNav = TabNavigator({
   HomeTab: {
@@ -41,7 +38,7 @@ export const TabNav = TabNavigator({
           />
         ),
       },
-    }
+    },
   },
   MapTab: {
     screen: MapScreen,
@@ -58,7 +55,7 @@ export const TabNav = TabNavigator({
         ),
       },
     },
-	}
+  },
 }, {
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? palette.RICH_NAVY : '#fff',
@@ -81,8 +78,8 @@ export const StacksOverTabs = {
   },
   PostDetail: {
     screen: HomePostDetailScreen,
-    navigationOptions: ({ navigation }) => {
-      title: 'navigation.state.params.name s Profile!'
+    navigationOptions: ({ _navigation }) => {
+      'navigation.state.params.name s Profile!';
     },
   },
 };

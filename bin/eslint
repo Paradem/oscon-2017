@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+VENDOR_PATH = File.expand_path('../', __dir__)
+
+Dir.chdir(VENDOR_PATH) do
+  begin
+    exec "./node_modules/.bin/eslint --config .eslintrc.js #{ARGV.join(' ')}"
+  rescue Errno::ENOENT
+    puts 'eslint executable was not detected in the system.'
+    puts 'install it with: `bin/yarn add --dev eslint`'
+  end
+end

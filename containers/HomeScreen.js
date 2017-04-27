@@ -1,5 +1,5 @@
-import React from 'react'
-import { styles, palette } from "../styles";
+import React from 'react';
+import { styles, palette } from '../styles';
 import {
   AppState,
   AsyncStorage,
@@ -14,67 +14,67 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import { NAV } from "../actions/types"
+import { NAV } from '../actions/types';
 
 class Screen extends React.Component {
 
   constructor(props) {
     super(props);
     AppState.addEventListener('change', (state) => {
-      if (state === "inactive") {
-        AsyncStorage.setItem('@Backup:posts', JSON.stringify(this.props.posts) );
+      if (state === 'inactive') {
+        AsyncStorage.setItem('@Backup:posts', JSON.stringify(this.props.posts));
       }
     });
 
     this.postPressed = this.postPressed.bind(this);
   }
 
-	componentWillMount() {
+  componentWillMount() {
 		// run on first launch!
-		AsyncStorage.getItem('@Backup:posts').then((postsFromStorage) => {
-			if (postsFromStorage !== null && this.posts().length === 0){
+    AsyncStorage.getItem('@Backup:posts').then((postsFromStorage) => {
+      if (postsFromStorage !== null && this.posts().length === 0) {
 			  this.props.restorePosts(postsFromStorage);
-			}
-		});
-	}
-
-	postPressed(post) {
-		this.props.navigation.dispatch( { type: "Navigation/NAVIGATE", routeName: "PostDetail",  id: post.id } );
+      }
+    });
   }
 
-	posts() {
-	  return this.props.posts;
-	}
+  postPressed(post) {
+    this.props.navigation.dispatch({ type: 'Navigation/NAVIGATE', routeName: 'PostDetail', id: post.id });
+  }
 
-	renderEmpty() {
+  posts() {
+	  return this.props.posts;
+  }
+
+  renderEmpty() {
     if (this.posts().length > 0) { return null; }
-    return <View style={screenStyles.postCard}>
+    return (<View style={screenStyles.postCard}>
       <Text style={styles.heading2}>Nothing to see here...</Text>
-    </View>
+    </View>);
   }
 
   renderPost(post) {
-    return <View key={post.id} style={styles.postCard}>
+    return (<View key={post.id} style={styles.postCard}>
       <Text style={styles.heading2}>{post.name}</Text>
-      <TouchableHighlight onPress={ () => this.postPressed(post) }>
-        <Image source={ { uri: post.path } } style={ { height: 150 }  } />
+      <TouchableHighlight onPress={() => this.postPressed(post)}>
+        <Image source={{ uri: post.path }} style={{ height: 150 }} />
       </TouchableHighlight>
-    </View>
+    </View>);
   }
 
-	render() {
-		return <View style={styles.container}>
+  render() {
+    return (<View style={styles.container}>
       <Text style={styles.heading1} >My Photos</Text>
-			<ScrollView style={styles.scrollSection} >
-			  { this.renderEmpty() }
-				{ this.posts().map( (post) => this.renderPost(post) ) }
-			</ScrollView>
-		</View>
-	}
+      <ScrollView style={styles.scrollSection} >
+        { this.renderEmpty() }
+        { this.posts().map(post => this.renderPost(post)) }
+      </ScrollView>
+    </View>);
+  }
 }
 function mapStateToProps(state) {
   return {
-		posts: state.posts
+    posts: state.posts,
   };
 }
 

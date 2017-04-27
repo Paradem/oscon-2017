@@ -1,12 +1,10 @@
-import React from 'react'
+import React from 'react';
 import {
   Text,
   TouchableHighlight,
 } from 'react-native';
-import { styles, palette } from "../styles";
+import { styles, palette } from '../styles';
 
-export default (props) => {
-  return <TouchableHighlight style={ [ styles.button, { backgroundColor: palette.CHARCOAL } ] } onPress={props.onPress} >
-    <Text style={ styles.buttonText } >{props.label}</Text>
-  </TouchableHighlight>
-}
+export default props => <TouchableHighlight style={[styles.button, { backgroundColor: palette.CHARCOAL }]} onPress={props.onPress} >
+  <Text style={styles.buttonText} >{props.label}</Text>
+</TouchableHighlight>;
