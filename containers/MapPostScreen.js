@@ -64,7 +64,8 @@ class Screen extends React.Component {
         style={screenStyles.camera}
         captureTarget={Camera.constants.CaptureTarget.disk}
         aspect={Camera.constants.Aspect.fit}>
-        <TouchableHighlight style={[ screenStyles.snapButton, { backgroundColor: palette.HONEYCOMB } ] } onPress={this.takePicture.bind(this)} >
+        <TouchableHighlight style={[ screenStyles.snapButton, { backgroundColor: palette.HONEYCOMB } ] } 
+          onPress={this.takePicture.bind(this)} >
           <Text style={ screenStyles.buttonText }>SNAP</Text>
         </TouchableHighlight>
       </Camera>

@@ -43,7 +43,7 @@ class Screen extends React.Component {
   }
 
 	posts() {
-		return Object.keys(this.props.posts).map((k) => this.props.posts[k])
+	  return this.props.posts;
 	}
 
   renderPost(post) {

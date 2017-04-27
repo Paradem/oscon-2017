@@ -28,12 +28,15 @@ class Screen extends React.Component {
 
 	deletePressed() {
 		this.props.deletePost(this.post());
-		this.props.navigatHome();
+		// NOTE: this could be handled in the ActionCreator with Saga or Thunk:
+    AsyncStorage.setItem('@Backup:posts', JSON.stringify(this.props.posts) ).then( () => {
+      this.props.navigateHome();
+    });
 	}
 
 	post() {
 		const postId = this.props.nav.routes[this.props.nav.index].id;
-		return postId && this.props.posts[postId] ? this.props.posts[postId] : {};
+		return postId && this.props.posts.find((post) => post.id === postId );
 	}
 
 	renderEmpty() {
@@ -42,7 +45,7 @@ class Screen extends React.Component {
 
 	render() {
 		const post = this.post();
-		if (post.id === undefined) { return this.renderEmpty(); }
+		if (post === undefined) { return this.renderEmpty(); }
 		return <View style={styles.container}>
 		  <Text>{post.name}</Text>
 			<View>
