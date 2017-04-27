@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
-import { navigationReducer } from "./navigation"
-import { draftPostReducer } from "./draftPost"
-import { postsReducer } from "./posts"
+import { navigationReducer } from './navigation';
+import { draftPostReducer } from './draftPost';
+import { postsReducer } from './posts';
 
-export const reducer = combineReducers(Object.assign(
+export default combineReducers(Object.assign(
   navigationReducer,
-	draftPostReducer,
-	postsReducer,
+  draftPostReducer,
+  postsReducer,
 ));
-
