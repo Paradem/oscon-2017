@@ -31,33 +31,28 @@ export const TabNav = TabNavigator({
   HomeTab: {
     screen: HomeScreen,
     navigationOptions: {
-      tabBar: {
-        label: 'Home',
-        icon: ({ tintColor, focused }) => (
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-home' : 'ios-home-outline'}
             size={26}
             style={{ color: tintColor }}
           />
-        ),
+        )
       },
-    }
   },
   MapTab: {
     screen: MapScreen,
     navigationOptions: {
-      title: null,
-      tabBar: {
-        label: 'Map',
-        icon: ({ tintColor, focused }) => (
+      tabBarLabel: 'Map',
+      tabBarIcon: ({ tintColor, focused }) => (
           <Ionicons
             name={focused ? 'ios-settings' : 'ios-settings-outline'}
             size={26}
             style={{ color: tintColor }}
           />
-        ),
+        )
       },
-    },
 	}
 }, {
   tabBarOptions: {

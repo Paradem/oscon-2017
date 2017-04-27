@@ -14,7 +14,6 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import { NAV } from "../actions/types"
 
 class Screen extends React.Component {
 
