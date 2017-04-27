@@ -20,7 +20,7 @@ import Camera from 'react-native-camera';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import { styles, palette, colors } from "../styles";
+import { styles, palette } from "../styles";
 import { CardStack } from 'react-navigation';
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;

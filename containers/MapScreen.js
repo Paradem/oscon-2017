@@ -13,8 +13,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NAV } from "../actions/types"
-import { styles, colors, palette } from "../styles";
-import MyNavScreen from "../components/MyNavScreen"
+import { styles, palette } from "../styles";
 
 import MapView from 'react-native-maps';
 

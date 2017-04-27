@@ -13,11 +13,6 @@ export const palette = {
 
 }
 
-export const colors = {
-  PRIMARY: palette.SKY_BLUE,
-  DANGER: palette.HONEYCOMB
-}
-
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -73,7 +68,7 @@ export const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.PRIMARY
+    backgroundColor: palette.SKY_BLUE
   },
   buttonText: {
     fontSize: 17,

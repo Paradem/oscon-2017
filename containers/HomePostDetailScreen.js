@@ -1,5 +1,5 @@
 import React from 'react'
-import { styles, colors, palette } from "../styles";
+import { styles, palette } from "../styles";
 import {
   AppState,
   AsyncStorage,
