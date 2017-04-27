@@ -31,7 +31,7 @@ const initialNavState = {
 };
 
 function navigateAction({ routeName, id }) {
-  return NavigationActions.navigate({ routeName, id });
+  return NavigationActions.navigate({ routeName, params: { id } });
 }
 
 export const navigationReducer = {

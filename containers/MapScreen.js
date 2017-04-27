@@ -129,4 +129,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(() => {}, mapDispatchToProps)(Screen);
+export default connect(() => { return {} }, mapDispatchToProps)(Screen);

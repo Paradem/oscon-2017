@@ -40,6 +40,11 @@ function annotation(post) {
 }
 
 class Screen extends React.Component {
+  
+  constructor() {
+    super(this);
+    this.renderEmpty = this.renderEmpty.bind(this);
+  }
 
   backPressed() {
     this.props.navigateBack();
@@ -54,13 +59,19 @@ class Screen extends React.Component {
   }
 
   post() {
-    const postId = this.props.nav.routes[this.props.nav.index].id;
-    return postId && this.props.posts.find(post => post.id === postId);
+    const params = this.props.nav.routes[this.props.nav.index].params;
+    return params && params.id && this.props.posts.find(post => post.id === params.id);
+  }
+
+  renderEmpty() {
+    return <View style={styles.container} >
+      <PrimaryButton label="Back" onPress={() => this.backPressed()} />
+    </View>
   }
 
   render() {
     const post = this.post();
-    if (post === undefined) { return (<View style={styles.container} />); }
+    if (post === undefined) { return (this.renderEmpty()); }
     return (<View style={styles.container}>
       <Text style={styles.heading1} >{post.name}</Text>
       <View style={styles.postCard} >

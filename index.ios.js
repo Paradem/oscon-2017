@@ -9,7 +9,7 @@ import createLogger from 'redux-logger';
 import {
   addNavigationHelpers,
 } from 'react-navigation';
-import { reducer } from './reducers';
+import reducer from './reducers';
 import { AppNavigator } from './reducers/navigation';
 
 // middleware that logs actions
