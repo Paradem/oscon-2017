@@ -24,6 +24,30 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const { width, height } = Dimensions.get('window');
 
+const screenStyles = StyleSheet.create({
+  scrollContainer: {
+    flex: 10,
+  },
+  imagePreview: {
+    height: 200,
+    alignItems: 'center',
+  },
+  camera: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  snapButton: {
+    borderRadius: 10,
+    opacity: 0.8,
+    backgroundColor: palette.HONEYCOMB,
+    alignItems: 'center',
+    width: 150,
+    height: 50,
+    margin: 20,
+  },
+});
+
 class Screen extends React.Component {
 
   constructor(props) {
@@ -63,18 +87,19 @@ class Screen extends React.Component {
           style={screenStyles.camera}
           captureTarget={Camera.constants.CaptureTarget.disk}
           aspect={Camera.constants.Aspect.fit}
-        >
-        <TouchableHighlight
-          style={[screenStyles.snapButton, { backgroundColor: palette.HONEYCOMB }]}
-          onPress={this.takePicture.bind(this)}
-        >
-          <Text style={styles.buttonText}>SNAP</Text>
-        </TouchableHighlight>
-      </Camera>
-      <View style={styles.toolbar}>
-        <SecondaryButton label="Cancel" onPress={() => this.cancel()} />
+          >
+          <TouchableHighlight
+            style={[screenStyles.snapButton, { backgroundColor: palette.HONEYCOMB }]}
+            onPress={this.takePicture.bind(this)}
+            >
+            <Text style={styles.buttonText}>SNAP</Text>
+          </TouchableHighlight>
+        </Camera>
+        <View style={styles.toolbar}>
+          <SecondaryButton label="Cancel" onPress={() => this.cancel()} />
+        </View>
       </View>
-    </View>);
+    );
   }
 
   renderPicturePreview() {
@@ -121,30 +146,6 @@ class Screen extends React.Component {
     </View>);
   }
 }
-const screenStyles = StyleSheet.create({
-  scrollContainer: {
-    flex: 10,
-  },
-  imagePreview: {
-    height: 200,
-    alignItems: 'center',
-  },
-  camera: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  snapButton: {
-    borderRadius: 10,
-    opacity: 0.8,
-    backgroundColor: palette.HONEYCOMB,
-    alignItems: 'center',
-    width: 150,
-    height: 50,
-    margin: 20,
-  },
-});
-
 function mapStateToProps(state) {
   return {
     draftPost: state.draftPost,
