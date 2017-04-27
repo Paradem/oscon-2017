@@ -14,11 +14,12 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+import SecondaryButton from '../components/SecondaryButton';
+import PrimaryButton from '../components/PrimaryButton';
 import Camera from 'react-native-camera';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { styles, palette, colors } from "../styles";
 import { CardStack } from 'react-navigation';
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
@@ -53,53 +54,37 @@ class Screen extends React.Component {
       mode: Camera.constants.CaptureMode.still
     }).then((data) => {
         this.setState({ photo: data })
+        this.nameTextInput.focus();
     }).catch(err => console.error(err));
   }
 
   renderStep1() {
     return <View style={styles.container}>
-      <Text style={styles.heading2} >Post Photo</Text>
+      <Text style={styles.heading1} >Post Photo</Text>
       <Camera
         ref={(cam) => { this.camera = cam; }}
         style={screenStyles.camera}
         captureTarget={Camera.constants.CaptureTarget.disk}
         aspect={Camera.constants.Aspect.fit}>
-        <TouchableHighlight style={[ screenStyles.snapButton, { backgroundColor: palette.HONEYCOMB } ] } 
+        <TouchableHighlight style={[ screenStyles.snapButton, { backgroundColor: palette.HONEYCOMB } ] }
           onPress={this.takePicture.bind(this)} >
-          <Text style={ screenStyles.buttonText }>SNAP</Text>
+          <Text style={ styles.buttonText }>SNAP</Text>
         </TouchableHighlight>
       </Camera>
-      <View style={screenStyles.toolbar}>
-        {this.renderCancel()}
+      <View style={styles.toolbar}>
+        <SecondaryButton label="Cancel" onPress={ () => this.cancel() } />
       </View>
     </View>
   }
 
   renderPicturePreview() {
     return <View style={{ flex: 1 }}>
+      <Text style={styles.heading1} >Post Photo</Text>
       <Image source={ { uri: this.state.photo.path } } style={ screenStyles.imagePreview } />
-      <Text style={screenStyles.buttonText} onPress={this.clearPicture.bind(this)}>Retake</Text>
+      <Text style={styles.buttonText} onPress={this.clearPicture.bind(this)}>Retake</Text>
     </View>
   }
 
-  renderCancel() {
-    return <TouchableHighlight style={ [ screenStyles.button, { backgroundColor: palette.CHARCOAL } ] } onPress={() => this.cancel() } >
-      <Text style={ screenStyles.buttonText } >Cancel</Text>
-    </TouchableHighlight>
-  }
-
-  renderSave() {
-    return <TouchableHighlight style={ screenStyles.button } onPress={() => this.savePost() } >
-      <Text style={ screenStyles.buttonText } >Save</Text>
-    </TouchableHighlight>
-  }
-
-  renderFooter() {
-    return <View style={screenStyles.toolbar}>
-      {this.renderCancel()}
-      {this.renderSave()}
-    </View>
-  }
 
   renderStep2() {
     return <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -111,6 +96,7 @@ class Screen extends React.Component {
           <View style={styles.formView}>
               {this.renderPicturePreview()}
               <TextInput
+                ref={ (nameTextInput) => { this.nameTextInput = nameTextInput } }
                 style={styles.textInput}
                 placeholder="Post Name"
                 onChangeText={(name) => this.props.setDraftPostName(name)}
@@ -119,6 +105,13 @@ class Screen extends React.Component {
         </ScrollView>
         {this.renderFooter()}
       </KeyboardAvoidingView>
+  }
+
+  renderFooter() {
+    return <View style={styles.toolbar}>
+      <SecondaryButton label="Cancel" onPress={ () => this.cancel() } />
+      <PrimaryButton label="Save" onPress={ () => this.savePost() } />
+    </View>
   }
 
   render() {
@@ -134,27 +127,6 @@ const screenStyles = StyleSheet.create({
   imagePreview: {
     height: 200,
     alignItems: 'center'
-  },
-  toolbar: {
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    backgroundColor: "#C00",
-    height: 50,
-  },
-  button: {
-    flex: 1,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.PRIMARY
-  },
-  buttonText: {
-    fontSize: 17,
-    textAlign: 'center',
-    flex: 1,
-    marginTop: 15,
-    justifyContent: 'space-around',
-    color: palette.WHITE,
   },
   camera: {
     flex: 1,

@@ -32,6 +32,22 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: palette.SILVER,
   },
+  heading1: {
+    fontSize: 24,
+    fontWeight: "300",
+    paddingLeft: 10,
+    paddingBottom: 2,
+    paddingTop:4,
+    color: palette.SKY_BLUE,
+  },
+  heading2: {
+    fontSize: 21,
+    fontWeight: "bold",
+    paddingLeft: 10,
+    paddingBottom: 2,
+    paddingTop:4,
+    color: palette.RICH_NAVY,
+  },
   formContainer: {
     flex: 1,
     backgroundColor: palette.SILVER,
@@ -40,6 +56,38 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     backgroundColor: palette.WHITE,
+  },
+	postCard: {
+		marginBottom: 10,
+		marginHorizontal: 7,
+		backgroundColor: palette.WHITE,
+		borderTopRightRadius: 10,
+		borderTopLeftRadius: 10,
+		paddingTop: 10,
+		borderBottomColor: palette.CHARCOAL,
+		borderBottomWidth: 4,
+
+  },
+  button: {
+    flex: 1,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.PRIMARY
+  },
+  buttonText: {
+    fontSize: 17,
+    textAlign: 'center',
+    flex: 1,
+    marginTop: 15,
+    justifyContent: 'space-around',
+    color: palette.WHITE,
+  },
+  toolbar: {
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    backgroundColor: "#C00",
+    height: 50,
   },
   welcome: {
     fontSize: 20,

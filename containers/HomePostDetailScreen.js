@@ -12,6 +12,8 @@ import {
   View,
 } from 'react-native';
 import MapView from 'react-native-maps';
+import SecondaryButton from '../components/SecondaryButton';
+import PrimaryButton from '../components/PrimaryButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
@@ -47,9 +49,10 @@ class Screen extends React.Component {
 		const post = this.post();
 		if (post === undefined) { return this.renderEmpty(); }
 		return <View style={styles.container}>
-		  <Text>{post.name}</Text>
-			<View>
-				<MapView style={[styles.map, {flex: 1}]}
+      <Text style={styles.heading1} >{post.name}</Text>
+			<View style={styles.postCard} >
+        <Image source={ { uri: post.path } } style={ { height: 150 }  } />
+				<MapView style={screenStyles.map}
 					initialRegion={this.getLocationRegion(post)}
 					showsUserLocation={true}
 					zoomEnabled={false}
@@ -58,14 +61,16 @@ class Screen extends React.Component {
 					legalLabelInsets={{bottom: 20, right: 20}} >
 				 <MapView.Marker coordinate={this.annotation(post)}  />
 				</MapView>
+        <View style={styles.toolbar}>
+          <PrimaryButton label="Back" onPress={ () => this.backPressed() } />
+          <SecondaryButton label="Delete" onPress={ () => this.deletePressed() } />
+        </View>
 			</View>
-			<Button onPress={() => this.backPressed() } title='Back' />
-			<Button onPress={() => this.deletePressed() } title='Delete' />
 		</View>
 	}
 
 	getLocationRegion(post) {
-		const delta = 0.1
+		const delta = 0.01
 		return {
 			latitude: post.coordinate.latitude || 1,
 			longitude: post.coordinate.longitude || 1,
@@ -79,7 +84,6 @@ class Screen extends React.Component {
 			id: post.id,
 			latitude: post.coordinate.latitude || 1,
 			longitude: post.coordinate.longitude || 1,
-			title: post.name ,
 		}
 	}
 
@@ -97,21 +101,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 const screenStyles = StyleSheet.create({
-	postName: {
-		fontSize: 21,
-	},
-	postCard: {
-		marginBottom: 10,
-		marginHorizontal: 7,
-		backgroundColor: "#FFFFFF",
-		shadowColor: "#F00",
-		shadowOffset: { height: 2, width: -0},
-		shadowRadius: 4,
-		borderRadius: 10,
-		shadowOpacity: 0.15,
-		padding: 0,
-  }
-
+  map: {
+    height: 100,
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Screen);

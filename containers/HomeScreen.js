@@ -46,22 +46,28 @@ class Screen extends React.Component {
 	  return this.props.posts;
 	}
 
+	renderEmpty() {
+    if (this.posts().length > 0) { return null; }
+    return <View style={screenStyles.postCard}>
+      <Text style={styles.heading2}>Nothing to see here...</Text>
+    </View>
+  }
+
   renderPost(post) {
-    return <View key={post.id} style={screenStyles.postCard}>
-      <Text style={screenStyles.postName}>{post.name}</Text>
+    return <View key={post.id} style={styles.postCard}>
+      <Text style={styles.heading2}>{post.name}</Text>
       <TouchableHighlight onPress={ () => this.postPressed(post) }>
-      <Image source={ {
-        uri: ( post.path ? post.path : "https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" ) } }
-    style={ { height: 150 }  } />
+        <Image source={ { uri: post.path } } style={ { height: 150 }  } />
       </TouchableHighlight>
-      <Text>{post.coordinate.latitude}, {post.coordinate.longitude}</Text>
     </View>
   }
 
 	render() {
 		return <View style={styles.container}>
+      <Text style={styles.heading1} >My Photos</Text>
 			<ScrollView style={styles.scrollSection} >
-				{ this.posts().map( (post) => { return this.renderPost(post) } ) }
+			  { this.renderEmpty() }
+				{ this.posts().map( (post) => this.renderPost(post) ) }
 			</ScrollView>
 		</View>
 	}
@@ -77,17 +83,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const screenStyles = StyleSheet.create({
-	postName: {
-		fontSize: 21,
-	},
-	postCard: {
-		marginBottom: 10,
-		marginHorizontal: 7,
-		backgroundColor: palette.WHITE,
-		borderRadius: 10,
-		paddingTop: 10,
-		paddingBottom: 10,
-  }
 
 });
 
