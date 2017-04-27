@@ -47,7 +47,7 @@ class Screen extends React.Component {
 
   renderEmpty() {
     if (this.posts().length > 0) { return null; }
-    return (<View style={screenStyles.postCard}>
+    return (<View style={styles.postCard}>
       <Text style={styles.heading2}>Nothing to see here...</Text>
     </View>);
   }
@@ -80,9 +80,4 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
-
-const screenStyles = StyleSheet.create({
-
-});
-
 export default connect(mapStateToProps, mapDispatchToProps)(Screen);

@@ -20,9 +20,6 @@ import Camera from 'react-native-camera';
 import { ActionCreators } from '../actions';
 import { styles, palette } from '../styles';
 
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
-const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
-const { width, height } = Dimensions.get('window');
 
 const screenStyles = StyleSheet.create({
   scrollContainer: {

@@ -37,12 +37,14 @@ class Screen extends React.Component {
   }
 
   post() {
-    const postId = this.props.nav.routes[this.props.nav.index].id;
-    return postId && this.props.posts.find(post => post.id === postId);
+    const params = this.props.nav.routes[this.props.nav.index].params;
+    return params && params.id && this.props.posts.find(post => post.id === params.id);
   }
 
   renderEmpty() {
-    return <View style={styles.container} />;
+    return <View style={styles.container} >
+      <PrimaryButton label="Back" onPress={() => this.backPressed()} />
+    </View>
   }
 
   render() {
