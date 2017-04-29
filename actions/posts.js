@@ -7,6 +7,13 @@ export function createPost(post) {
   };
 }
 
+export function setPostTinted(path) {
+  return {
+    type: types.SET_POST_TINTED,
+    path,
+  };
+}
+
 export function deletePost(post) {
   return {
     type: types.DELETE_POST,

@@ -24,6 +24,8 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		686A539B565849139906D442 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1B5F4D80EFD487097A57CEC /* libRCTCamera.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		FC5AD9EF1EB39923003A05AB /* Sepiafy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5AD9EE1EB39923003A05AB /* Sepiafy.swift */; };
+		FC5AD9F11EB39A2B003A05AB /* SepiafyBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AD9F01EB39A2B003A05AB /* SepiafyBridge.m */; };
 		FCEAB4841E46CACD00AFDA5D /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCEAB47A1E46CACD00AFDA5D /* Entypo.ttf */; };
 		FCEAB4851E46CACD00AFDA5D /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCEAB47B1E46CACD00AFDA5D /* EvilIcons.ttf */; };
 		FCEAB4861E46CACD00AFDA5D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCEAB47C1E46CACD00AFDA5D /* FontAwesome.ttf */; };
@@ -260,6 +262,9 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		D1B5F4D80EFD487097A57CEC /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		D20D05062C184EF5B0473FDE /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
+		FC5AD9ED1EB39922003A05AB /* Plimage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Plimage-Bridging-Header.h"; sourceTree = "<group>"; };
+		FC5AD9EE1EB39923003A05AB /* Sepiafy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sepiafy.swift; path = Plimage/Sepiafy.swift; sourceTree = "<group>"; };
+		FC5AD9F01EB39A2B003A05AB /* SepiafyBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SepiafyBridge.m; sourceTree = "<group>"; };
 		FCEAB47A1E46CACD00AFDA5D /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		FCEAB47B1E46CACD00AFDA5D /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		FCEAB47C1E46CACD00AFDA5D /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -368,6 +373,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				FC5AD9EE1EB39923003A05AB /* Sepiafy.swift */,
+				FC5AD9ED1EB39922003A05AB /* Plimage-Bridging-Header.h */,
+				FC5AD9F01EB39A2B003A05AB /* SepiafyBridge.m */,
 			);
 			name = Plimage;
 			sourceTree = "<group>";
@@ -537,6 +545,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 97Q5SB5697;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -859,8 +868,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC5AD9F11EB39A2B003A05AB /* SepiafyBridge.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				FC5AD9EF1EB39923003A05AB /* Sepiafy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +894,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 97Q5SB5697;
@@ -902,6 +914,9 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Plimage;
+				SWIFT_OBJC_BRIDGING_HEADER = "Plimage-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -910,6 +925,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 97Q5SB5697;
 				HEADER_SEARCH_PATHS = (
@@ -928,6 +944,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = Plimage;
+				SWIFT_OBJC_BRIDGING_HEADER = "Plimage-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

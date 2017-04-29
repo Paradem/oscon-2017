@@ -54,7 +54,10 @@ class Screen extends React.Component {
     return (<View key={post.id} style={styles.postCard}>
       <Text style={styles.heading2}>{post.name}</Text>
       <TouchableHighlight onPress={() => this.postPressed(post)}>
-        <Image source={{ uri: post.path }} style={{ height: 150 }} />
+        <Image
+          key={post.path + post.tinted}
+          source={{ uri: post.path }} style={{ height: 150 }}
+        />
       </TouchableHighlight>
     </View>);
   }

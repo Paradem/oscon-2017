@@ -4,9 +4,12 @@ import React from 'react';
 import {
   AsyncStorage,
   Image,
+  Platform,
   StyleSheet,
   Text,
   View,
+  NativeModules,
+  NativeAppEventEmitter,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -48,21 +51,30 @@ class Screen extends React.Component {
     this.renderEmpty = this.renderEmpty.bind(this);
   }
 
+  componentDidMount() {
+    NativeAppEventEmitter.addListener('photoTinted', (path) => {
+      this.props.setPostTinted(path);
+    });
+  }
+
+  componentWillUnmount() {
+    NativeAppEventEmitter.removeListener('photoTinted');
+  }
+
   backPressed() {
     this.props.navigateBack();
   }
 
   deletePressed() {
-    this.props.deletePost(this.post());
+    this.props.deletePost(this.props.post);
     // NOTE: this could be handled in the ActionCreator with Saga or Thunk:
     AsyncStorage.setItem('@Backup:posts', JSON.stringify(this.props.posts)).then(() => {
       this.props.navigateHome();
     }).catch(err => console.warn(err));
   }
 
-  post() {
-    const params = this.props.nav.routes[this.props.nav.index].params;
-    return params && params.id && this.props.posts.find(post => post.id === params.id);
+  tint() {
+    NativeModules.Sepiafy.tint(this.props.post.path);
   }
 
   renderEmpty() {
@@ -72,12 +84,15 @@ class Screen extends React.Component {
   }
 
   render() {
-    const post = this.post();
-    if (post === undefined) { return (this.renderEmpty()); }
+    const post = this.props.post;
+    if (!post) { return (this.renderEmpty()); }
     return (<View style={styles.container}>
       <Text style={styles.heading1} >{post.name}</Text>
       <View style={styles.postCard} >
-        <Image source={{ uri: post.path }} style={{ height: 150 }} />
+        <Image
+          key={post.path + post.tinted}
+          source={{ uri: post.path }} style={{ height: 150 }}
+        />
         <MapView
           style={screenStyles.map}
           initialRegion={getLocationRegion(post)}
@@ -90,6 +105,8 @@ class Screen extends React.Component {
           <MapView.Marker coordinate={annotation(post)} />
         </MapView>
         <View style={styles.toolbar}>
+          { (post.tinted === false && Platform.OS === 'ios') ?
+            <PrimaryButton label="Westernize" onPress={() => this.tint()} /> : null }
           <PrimaryButton label="Back" onPress={() => this.backPressed()} />
           <SecondaryButton label="Delete" onPress={() => this.deletePressed()} />
         </View>
@@ -102,17 +119,21 @@ Screen.propTypes = {
   navigateBack: React.PropTypes.func.isRequired,
   navigateHome: React.PropTypes.func.isRequired,
   deletePost: React.PropTypes.func.isRequired,
+  setPostTinted: React.PropTypes.func.isRequired,
   posts: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  nav: React.PropTypes.shape({
-    routes: React.PropTypes.array,
-    index: React.PropTypes.number,
+  post: React.PropTypes.shape({
+    path: React.PropTypes.string,
+    tinted: React.PropTypes.bool,
+    name: React.PropTypes.string,
   }).isRequired,
 };
 
 function mapStateToProps(state) {
+  const params = state.nav.routes[state.nav.index].params;
+  const post = params ? state.posts.find(postInStore => postInStore.id === params.id) : null;
   return {
+    post,
     posts: state.posts,
-    nav: state.nav,
   };
 }
 

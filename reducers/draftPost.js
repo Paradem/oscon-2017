@@ -3,6 +3,7 @@ import * as types from '../actions/types';
 const initialState = {
   name: null,
   photo: null,
+  tinted: false,
   coordinate: { latitude: null, longitude: null },
 };
 

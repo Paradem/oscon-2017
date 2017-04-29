@@ -6,6 +6,7 @@ import {
   Animated,
   Button,
   Dimensions,
+  Platform,
   StyleSheet,
   View,
 } from 'react-native';
@@ -23,13 +24,23 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const screenStyles = StyleSheet.create({
-  pinOptionButton: { },
-  pinOptionCard: {
-    position: 'absolute',
-    backgroundColor: '#FFFFFF',
-    width,
-    bottom: 0,
+  pinOptionButton: {
+
   },
+  pinOptionCard: Platform.select({
+    ios: {
+      position: 'absolute',
+      backgroundColor: '#FFFFFF',
+      width,
+      bottom: 0,
+    },
+    android: {
+      position: 'absolute',
+      backgroundColor: '#FFFFFF',
+      width,
+      bottom: -10,
+    },
+  }),
 });
 
 class Screen extends React.Component {

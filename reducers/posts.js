@@ -12,6 +12,11 @@ const postsReducer = {
         return state.filter(post => post.id !== action.post.id);
       case types.SET_POSTS:
         return action.posts;
+      case types.SET_POST_TINTED:
+        return [...state.map((post) => {
+          if (post.path !== action.path) { return post; }
+          return Object.assign(post, { tinted: true });
+        })];
       case types.CREATE_POST: {
         const id = `p_${action.post.coordinate.latitude}_${action.post.coordinate.longitude}`;
         const path = action.post.path || placeholderPath();

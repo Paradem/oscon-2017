@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   KeyboardAvoidingView,
+  Platform,
   Image,
   ScrollView,
   StyleSheet,
@@ -101,7 +102,7 @@ class Screen extends React.Component {
 
   renderPicturePreview() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, height: 240 }}>
         <Text style={styles.heading1} >Post Photo</Text>
         <Image source={{ uri: this.state.photo.path }} style={screenStyles.imagePreview} />
         <Text style={styles.buttonText} onPress={this.clearPicture}>Retake</Text>
@@ -110,7 +111,10 @@ class Screen extends React.Component {
 
 
   renderStep2() {
-    return (<KeyboardAvoidingView style={styles.container} behavior="padding">
+    return (<KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : null}
+    >
       <ScrollView
         keyboardDismissMode="interactive"
         showsVerticalScrollIndicator

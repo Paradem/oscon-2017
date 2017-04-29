@@ -1,6 +1,7 @@
 import {
   StyleSheet,
   Platform,
+  Dimensions,
 } from 'react-native';
 
 export const palette = {
@@ -94,6 +95,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginTop: Platform.OS === 'ios' ? 20 : 0,
+    height: Dimensions.height,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
