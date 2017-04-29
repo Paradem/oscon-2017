@@ -15,11 +15,10 @@ class Sepiafy: NSObject {
   
   @objc func tint(_ path:String) -> Void {
     NSLog("Tinting: %@", path);
-    let theImageView    = UIImage(contentsOfFile: path)
-    if let result = theImageView?.maskWithColor(color: UIColor.brown) {
+    let image    = UIImage(contentsOfFile: path)
+    if let result = image?.maskWithColor(color: UIColor.brown) {
       if let data = UIImagePNGRepresentation(result) {
         try? data.write(to: URL.init(fileURLWithPath: path))
-        
         self.bridge.eventDispatcher().sendAppEvent( withName:"photoTinted", body: path )
         
       }
@@ -42,7 +41,7 @@ extension UIImage {
     let colorSpace = CGColorSpaceCreateDeviceRGB()
     let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
     let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)!
-    
+
     context.clip(to: bounds, mask: maskImage)
     context.setFillColor(color.cgColor)
     context.fill(bounds)
