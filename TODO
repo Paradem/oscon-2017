@@ -23,3 +23,37 @@ At this point (assuming there’s time), I’ll illustrate some of the technique
 between Swift and React Native by creating a special “Westernize” button that calls a GPU-accelerated
 image manipulation library, transforms the binary image and then issues a callback back to the
 React Native application in order to update the redux store.
+
+
+
+1. Simple App Walkthrough
+  - Getting Started
+    - XCode
+    - Brew
+    - NPM / Node
+  - iOS overview
+2. Running on Android
+  - Getting Started Guide
+  - Dependencies:
+    - JDK
+    - Android Studio
+    - Virtual Machine packages
+3. Review Routes
+  - Containers vs Components
+4. Implementing react-native-map
+  - reference package.json
+  - Info.plist
+  - Android API Key
+[ PROBLEM ] - Drawing on community components - Bringing in react-native-maps
+5. Saving a post to the redux store
+  - What is Redux? Actions, Reducers and connect()
+[ PROBLEM ] - implementing the Draft Post reducer & Action
+
+6. Routing deep dive
+  - What's in React Navigation?
+    - StackNavigator / TabNavigator
+    - Nesting navigation
+[ PROBLEM ] - implementing a detail view
+
+7. Writing native code
+  - Using Swift with React Native
