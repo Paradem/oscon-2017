@@ -22,8 +22,6 @@ class Screen extends React.Component {
         AsyncStorage.setItem('@Backup:posts', JSON.stringify(this.props.posts));
       }
     });
-
-    this.postPressed = this.postPressed.bind(this);
   }
 
   componentWillMount() {
@@ -33,10 +31,6 @@ class Screen extends React.Component {
         this.props.restorePosts(postsFromStorage);
       }
     });
-  }
-
-  postPressed(post) {
-    this.props.navigatePostDetail(post);
   }
 
   posts() {
@@ -53,12 +47,10 @@ class Screen extends React.Component {
   renderPost(post) {
     return (<View key={post.id} style={styles.postCard}>
       <Text style={styles.heading2}>{post.name}</Text>
-      <TouchableHighlight onPress={() => this.postPressed(post)}>
-        <Image
-          key={post.path + post.tinted}
-          source={{ uri: post.path }} style={{ height: 150 }}
-        />
-      </TouchableHighlight>
+      <Image
+        key={post.path + post.tinted}
+        source={{ uri: post.path }} style={{ height: 150 }}
+      />
     </View>);
   }
 
@@ -74,7 +66,6 @@ class Screen extends React.Component {
 }
 
 Screen.propTypes = {
-  navigatePostDetail: React.PropTypes.func.isRequired,
   restorePosts: React.PropTypes.func.isRequired,
   posts: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 };

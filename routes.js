@@ -11,7 +11,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './containers/HomeScreen';
 import MapScreen from './containers/MapScreen';
 import MapPostScreen from './containers/MapPostScreen';
-import HomePostDetailScreen from './containers/HomePostDetailScreen';
 import { palette } from './styles';
 
 const TabBarIcon = props =>
@@ -72,8 +71,5 @@ export const StacksOverTabs = {
     navigationOptions: {
       title: 'Notification Settings',
     },
-  },
-  PostDetail: {
-    screen: HomePostDetailScreen,
   },
 };
