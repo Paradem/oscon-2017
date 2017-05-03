@@ -4,7 +4,26 @@ function placeholderPath() {
   return 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150';
 }
 
-const initialState = [];
+const initialState = [
+  {
+    coordinate: {
+      latitude: 1,
+      longitude: 2,
+    },
+    id: '1',
+    name: 'A Great Post',
+    path: placeholderPath(),
+  },
+  {
+    coordinate: {
+      latitude: 1,
+      longitude: 2,
+    },
+    id: '2',
+    name: 'Another Great Post',
+    path: placeholderPath(),
+  }
+];
 const postsReducer = {
   posts: (state = initialState, action) => {
     switch (action.type) {

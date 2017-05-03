@@ -8,11 +8,11 @@ import {
   Dimensions,
   Platform,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MapView from 'react-native-maps';
 
 import { ActionCreators } from '../actions';
 import { styles } from '../styles';
@@ -90,14 +90,6 @@ class Screen extends React.Component {
     this.props.navigateMapPost();
   }
 
-  showMarker() {
-    if (this.state.pin) {
-      return (<MapView.Marker coordinate={this.state.pin} />);
-    }
-
-    return null;
-  }
-
   showActions() {
     if (this.state.pin) {
       return (
@@ -117,19 +109,7 @@ class Screen extends React.Component {
     if (this.state.initialPosition === null) { return (<View style={styles.mapContainer} />); }
     return (
       <View style={styles.mapContainer} >
-        <MapView
-          style={styles.map}
-          onPress={this.onMapPress}
-          showsUserLocation
-          initialRegion={{
-            latitude: this.state.initialPosition.latitude,
-            longitude: this.state.initialPosition.longitude,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-          }}
-        >
-          {this.showMarker()}
-        </MapView>
+        <Text>Map goes here</Text>
         {this.showActions()}
       </View>
     );
