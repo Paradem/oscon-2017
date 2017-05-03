@@ -59,7 +59,6 @@ class Screen extends React.Component {
 
   savePost() {
     Keyboard.dismiss();
-    this.props.createPost(Object.assign({}, this.state.photo, this.props.draftPost));
     this.props.navigateHome();
   }
 
@@ -127,7 +126,6 @@ class Screen extends React.Component {
             ref={(nameTextInput) => { this.nameTextInput = nameTextInput; }}
             style={styles.textInput}
             placeholder="Post Name"
-            onChangeText={name => this.props.setDraftPostName(name)}
           />
         </View>
       </ScrollView>
@@ -151,18 +149,12 @@ class Screen extends React.Component {
 
 Screen.propTypes = {
   navigateBack: React.PropTypes.func.isRequired,
-  createPost: React.PropTypes.func.isRequired,
-  setDraftPostName: React.PropTypes.func.isRequired,
   navigateHome: React.PropTypes.func.isRequired,
-  draftPost: React.PropTypes.shape({
-
-  }).isRequired,
 };
 
 
 function mapStateToProps(state) {
   return {
-    draftPost: state.draftPost,
   };
 }
 

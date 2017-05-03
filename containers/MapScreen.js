@@ -66,7 +66,6 @@ class Screen extends React.Component {
 
   onMapPress(e) {
     this.setState({ pin: e.nativeEvent.coordinate });
-    this.props.setDraftPostCoordinates(e.nativeEvent.coordinate);
     this.state.pinActionTabHeight.setValue(0);
     Animated.spring(
       this.state.pinActionTabHeight,
@@ -139,7 +138,6 @@ class Screen extends React.Component {
 
 Screen.propTypes = {
   navigateMapPost: React.PropTypes.func.isRequired,
-  setDraftPostCoordinates: React.PropTypes.func.isRequired,
 };
 
 function mapStateToProps() {
