@@ -75,8 +75,5 @@ export const StacksOverTabs = {
   },
   PostDetail: {
     screen: HomePostDetailScreen,
-    navigationOptions: ({ _navigation }) => {
-      'navigation.state.params.name s Profile!';
-    },
   },
 };
