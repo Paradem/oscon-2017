@@ -125,7 +125,7 @@ Screen.propTypes = {
     path: React.PropTypes.string,
     tinted: React.PropTypes.bool,
     name: React.PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 function mapStateToProps(state) {
